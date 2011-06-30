@@ -1,14 +1,17 @@
-<html><body style="font:11px/1.14 arial,helvetica,sans-serif;"><input id="nick" placeholder="nick" /><input id="msg" placeholder="message" /><div id="msgs"></div><script>(function(){
-function jsonp(u,cb){var a=jsonp._c=(jsonp._c||0)+1,b='picojsonp_'+a,c=document,d=c.body,s=c.createElement('script');window[b]=function(){d.removeChild(s);cb.apply(cb,arguments);cb=c=d=s=null;};s.src=u.replace('{callback}',b);d.appendChild(s);}
-var d={};
-function $(i){return document.getElementById(i);}
-function e(i){return encodeURIComponent(i)};
-function m(i){return i.length>10?i.substring(0,10):i;}
-function html(i){ return (i||'').replace(/</gm,'&lt;').replace(/>/gm,'&gt;').replace(/"/gm,'&quot;'); }
-function disp(m, p, d){ p=$('msgs'); d=document.createElement('div'); d.innerHTML='<b>'+html(m.user)+':</b> '+html(m.text); p.childNodes[0]?p.insertBefore(d,p.childNodes[0]):p.appendChild(d); }
-function msgCb(r,i){for(i=0;i<r.length;i++){ disp(r[i]); d.t=r[i].t; } setTimeout(get,250);}
-function get(){ jsonp('/?a=get&cb={callback}&since='+(d.t||''), msgCb); }
-function post(){ var msg=$('msg').value,nick=$('nick').value; jsonp('/?a=post&cb={callback}&user='+e(m(nick))+'&text='+e(msg),function(){$('msg').value='';}); }
-$('msg').onkeydown=function(e,key){key=e.keyCode||e.which; if(key===13){ post(); } };
-get();
-}());</script></body></html>
+<!DOCTYPE html><html><head><title>MicronChat</head></head>
+<body style="font:11px/1.14 arial,helvetica,sans-serif;">
+<input id="nick" placeholder="nick" /><input id="msg" placeholder="message" /><div id="msgs"></div>
+<script>(function(d){
+	function jsonp(u,cb){var a=jsonp._c=(jsonp._c||0)+1,b='picojsonp_'+a,c=document,d=c.body,s=c.createElement('script');window[b]=function(){d.removeChild(s);cb.apply(cb,arguments);cb=c=d=s=null;};s.src=u.replace('{callback}',b);d.appendChild(s);}
+	function $(i){return document.getElementById(i);}
+	function e(i){return encodeURIComponent(i)};
+	function m(i){return i.length>10?i.substring(0,10):i;}
+	function html(i){ return (i||'').replace(/</gm,'&lt;').replace(/>/gm,'&gt;').replace(/"/gm,'&quot;'); }
+	function disp(m, p, d){ p=$('msgs'); d=document.createElement('div'); d.innerHTML='<b>'+html(m.user)+':</b> '+html(m.text); p.childNodes[0]?p.insertBefore(d,p.childNodes[0]):p.appendChild(d); }
+	function msgCb(r,i){for(i=0;i<r.length;i++){ disp(r[i]); d.t=r[i].t; } setTimeout(get,250);}
+	function get(){ jsonp('/?a=get&cb={callback}&since='+(d.t||''), msgCb); }
+	function post(){ var msg=$('msg').value,nick=$('nick').value; jsonp('/?a=post&cb={callback}&user='+e(m(nick))+'&text='+e(msg),function(){$('msg').value='';}); }
+	$('msg').onkeydown=function(e,key){key=e.keyCode||e.which; if(key===13){ post(); } };
+	get();
+}({}));</script>
+</body></html>

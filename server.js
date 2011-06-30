@@ -11,8 +11,13 @@
                         op = p.cb + '(' + JSON.stringify(r) + ')';
                 }
                 else if (p.a==='post') {
-                        d.msgs.push({ text:p.text, user:p.user, t:Date.now() });
-                        op = p.cb + '({"success":true})';
+			if (p.text && p.user && p.user.length<=10) {
+	                        d.msgs.push({ text:p.text, user:p.user, t:Date.now() });
+        	                op = p.cb + '({"success":true})';
+			}
+			else {
+        	                op = p.cb + '({"success":false})';
+			}
                 }
                 else {
                         type = 'text/html';
